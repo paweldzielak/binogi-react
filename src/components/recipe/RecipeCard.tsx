@@ -1,8 +1,8 @@
 import React from "react";
-import { Recipe } from "../../utils/recipe.utils";
 import { TimeIcon } from "@chakra-ui/icons";
 
 import "./recipe.styles.scss";
+import { Recipe } from "../../types/types";
 
 interface props {
   recipe: Recipe;

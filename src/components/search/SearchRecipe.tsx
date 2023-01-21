@@ -4,11 +4,10 @@ import { Button, Input, Divider } from '@chakra-ui/react'
 
 import {
   getSearchRecipeResults,
-  RecipeSearchResults,
-  Recipe,
 } from "../../utils/recipe.utils";
 import RecipeList from "../recipe-list/RecipeList";
 import "./searchRecipe.scss";
+import { Recipe, RecipeSearchResults } from "../../types/types";
 
 const SearchRecipe: React.FC = () => {
   const [inputValue, setInputValue] = useState("");

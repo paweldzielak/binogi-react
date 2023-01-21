@@ -1,11 +1,10 @@
 import React from "react"
-import { Recipe } from "../../utils/recipe.utils";
+import { Recipe } from '../../types/types'
 import RecipeCard from "../recipe/RecipeCard";
 
 interface props {
   recipeList: Recipe[]
 }
-
 
 const RecipeList: React.FC<props> = ({recipeList}) => {
 

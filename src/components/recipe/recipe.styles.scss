@@ -1,6 +1,8 @@
 .recipe-container {
   display: flex;
   margin: 1rem;
+  max-width: 1000px;
+  
 
   &__image {
     width: 300px;
