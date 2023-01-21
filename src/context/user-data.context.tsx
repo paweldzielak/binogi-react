@@ -1,30 +1,34 @@
 import { createContext, useEffect, useReducer } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-import { Recipe } from "../types/types";
-
+import { userDataReducer } from "../reducers/userDataReducer";
 
 export type RecipeContextState = {
-  bookmarkedRecipes: Recipe[] | null;
-  setBookmarkedRecipes: (value: Recipe[] | null) => void;
+  bookmarkedRecipesIds: string[] | null;
+  dispatch: React.Dispatch<any>;
 };
 
 export const contextDefaultValues: RecipeContextState = {
-  bookmarkedRecipes: [],
-  setBookmarkedRecipes: () => {},
+  bookmarkedRecipesIds: [],
+  dispatch: () => {},
 };
 
 export const UserDataContext = createContext<RecipeContextState>(contextDefaultValues);
 
 export const UserDataProvider = ({ children } : { children: JSX.Element | JSX.Element[] }) => {
-  const [bookmarkedRecipes, setBookmarkedRecipes] = useLocalStorage('bookmarkedRecipes', contextDefaultValues.bookmarkedRecipes)
+  const [bookmarkedRecipesIds, setBookmarkedRecipesIds] = useLocalStorage('bookmarkedRecipesIds', contextDefaultValues.bookmarkedRecipesIds)
+
+  const [currentBookmarkedRecipeIds, dispatch] = useReducer(
+    userDataReducer, [], () => []
+  );
+
 
   useEffect(() => {
-    setBookmarkedRecipes(bookmarkedRecipes);
-  }, [bookmarkedRecipes, setBookmarkedRecipes]);
+    setBookmarkedRecipesIds(currentBookmarkedRecipeIds);
+  }, [currentBookmarkedRecipeIds, setBookmarkedRecipesIds]);
 
   return (
-    <UserDataContext.Provider value={{ bookmarkedRecipes, setBookmarkedRecipes }}>
+    <UserDataContext.Provider value={{ bookmarkedRecipesIds: currentBookmarkedRecipeIds, 
+    dispatch }}>
       {children}
     </UserDataContext.Provider>
   );

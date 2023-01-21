@@ -1,7 +1,12 @@
 import React from "react";
 import "./bookmarkedList.scss";
 
-const BookmarkedList:React.FC = () => {
+interface props {
+  handleBookmarkedId: Function
+  bookmarkedRecipesIds: string[] | null
+}
+
+const BookmarkedList:React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId}) => {
   return (
     <div className="bookmarked-list">
       <h1>Bookmarked TEST</h1>

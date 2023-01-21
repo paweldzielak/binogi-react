@@ -8,16 +8,19 @@ import MainContent from "./components/main-content/MainContent";
 import Sidebar from "./components/sidebar/Sidebar";
 
 import "./App.css";
+import { UserDataProvider } from "./context/user-data.context";
 
 function App() {
   return (
     <div className="App">
       <ChakraProvider>
-        <BrowserRouter>
-          <Header />
-          <Sidebar />
-          <MainContent />
-        </BrowserRouter>
+        <UserDataProvider>
+          <BrowserRouter>
+            <Header />
+            <Sidebar />
+            <MainContent />
+          </BrowserRouter>
+        </UserDataProvider>
       </ChakraProvider>
     </div>
   );

@@ -9,7 +9,15 @@ import RecipeList from "../recipe-list/RecipeList";
 import "./searchRecipe.scss";
 import { Recipe, RecipeSearchResults } from "../../types/types";
 
-const SearchRecipe: React.FC = () => {
+
+interface props {
+  handleBookmarkedId: Function
+  bookmarkedRecipesIds: string[] | null
+}
+
+const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId}) => {
+  console.log('searchRecipe', handleBookmarkedId);
+
   const [inputValue, setInputValue] = useState("");
   const [recipes, setRecipes] = useState<Recipe[]>();
 
