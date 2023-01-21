@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import BookmarkedList from "../bookmarked-list/BookmarkedList.component";
-import SearchRecipe from "../search/SearchRecipe.component";
+import BookmarkedList from "../bookmarked-list/BookmarkedList";
+import SearchRecipe from "../search/SearchRecipe";
 
 import "./mainContent.scss";
 

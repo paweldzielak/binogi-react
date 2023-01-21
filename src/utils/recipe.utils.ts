@@ -9,7 +9,7 @@ export type Recipe = {
   imageUrl: string
   calories: number
   label: string
-  totalTime: string
+  totalTime: number
   mealType: string
   dietLabels: string[]
 }

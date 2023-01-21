@@ -1,3 +1,30 @@
 .search-recipe {
-  background-color: lightcoral;
+  font-size: 3.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    margin: 0.2rem auto;
+  }
+
+  &__form {
+    display: flex;
+    margin: 0.2rem 15%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    margin: 0.2rem 1rem;
+  }
+
+  &__button {
+    margin: 0.2rem 1rem;
+  }
+
+  &__horizontal {
+    margin: 0.8rem auto;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Recipe } from "../../utils/recipe.utils";
 import RecipeCard from "../recipe/RecipeCard";
 
@@ -12,8 +12,8 @@ const RecipeList: React.FC<props> = ({recipeList}) => {
   return (
     <div className="recipe-list">
 
-    {recipeList.map((recipe:Recipe) => {
-        return <RecipeCard recipe={recipe} />
+    {recipeList.map((recipe:Recipe, idx) => {
+        return <RecipeCard key={recipe.label + idx} recipe={recipe} />
       })}
     </div>
   );
