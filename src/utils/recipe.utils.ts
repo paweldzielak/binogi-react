@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import {Recipe, RecipeSearchResults } from '../types/types'
+import { Recipe, RecipeSearchResults } from '../types/types'
 
 interface RecipeAPI {
   uri: string
@@ -152,16 +152,19 @@ interface Self {
   href: string
 }
 
+const getRecipeId = (directUrl: string): string => {
+  return directUrl.split('/')[6].split('?')[0];
+}
 
 const getRecipesByUrl = async (url: string): Promise<RecipeSearchResults> => {
   let recipes: Recipe[] = [];
   try {
     const { data } = await axios.get(url)
-
     const nextPageUrl: string = data._links.next.href;
 
     recipes = data.hits.map(({ _links, recipe }: { _links: Links, recipe: RecipeAPI }) => {
       return {
+        id: getRecipeId(_links.self.href),
         imageUrl: recipe.image,
         calories: Math.round(recipe.calories),
         label: recipe.label,

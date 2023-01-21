@@ -4,6 +4,7 @@ export type RecipeSearchResults = {
 }
 
 export type Recipe = {
+  id: string
   imageUrl: string
   calories: number
   label: string
