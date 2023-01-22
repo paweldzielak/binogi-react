@@ -17,7 +17,7 @@ const MainContent: React.FC = () => {
     dispatch({ type, recipeId });
   };
 
-  console.log("bookmarkedRecipesIds", bookmarkedRecipesIds);
+  // console.log("bookmarkedRecipesIds", bookmarkedRecipesIds);
 
   return (
     <main className="content">

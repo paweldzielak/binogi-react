@@ -16,9 +16,10 @@ interface props {
 }
 
 const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId}) => {
-  console.log('searchRecipe', handleBookmarkedId);
+  // console.log('searchRecipe', handleBookmarkedId);
 
   const [inputValue, setInputValue] = useState("");
+  const [nextPageUrl, setNextPageUrl] = useState("");
   const [recipes, setRecipes] = useState<Recipe[]>();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,6 +31,7 @@ const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId
       result;
 
     setRecipes(recipes);
+    setNextPageUrl(nextPageUrl);
   };
 
   return (
@@ -52,7 +54,7 @@ const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId
         </form>
         <Divider width='90%' className="search-recipe__horizontal"/>
       </div>
-      {recipes && <RecipeList {...{ recipeList: recipes }} />}
+      {recipes && <RecipeList {...{ recipeList: recipes, nextPageUrl: nextPageUrl }} />}
     </>
   );
 };
