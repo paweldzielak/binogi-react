@@ -1,5 +1,17 @@
 .sidebar {
   grid-area: sidebar;
-  background-color: #ccc;
+  background-color: #3c3c3c;
   padding: 1em;
+  font-size: 2rem;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 1.5rem;
+  }
+
+  max-width: 35rem;
+  min-width: 20rem;
+
+  & > * {
+    margin-bottom: 1rem;
+  }
 }

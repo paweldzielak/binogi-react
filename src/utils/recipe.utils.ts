@@ -160,11 +160,11 @@ const getRecipesByUrl = async (url: string): Promise<RecipeSearchResults> => {
   let recipes: Recipe[] = [];
   try {
     const { data } = await axios.get(url)
-    const nextPageUrl: string = data._links.next.href;
+    const nextPageUrl: string = data?._links?.next?.href;
 
     recipes = data.hits.map(({ _links, recipe }: { _links: Links, recipe: RecipeAPI }) => {
       return {
-        id: getRecipeId(_links.self.href),
+        id: getRecipeId(_links?.self?.href),
         imageUrl: recipe.image,
         calories: Math.round(recipe.calories),
         label: recipe.label,
