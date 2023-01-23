@@ -66,7 +66,7 @@ const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId
         </form>
         <Divider width='90%' className="search-recipe__horizontal"/>
       </div>
-      {recipes && <RecipeList {...{ recipeList: recipes, nextPageUrl: nextPageUrl }} />}
+      {recipes && <RecipeList recipeList={recipes} />}
       {nextPageUrl && <Button colorScheme='blue' size='lg' margin='0.2rem auto' marginTop='2rem' display='block'
       className="btn btn-next-page recipe-list__btn" onClick={handleLoadMoreRecipes}>
         Show more 
