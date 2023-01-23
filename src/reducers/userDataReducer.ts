@@ -10,10 +10,6 @@ interface UserDataAction {
 
 export function userDataReducer(state: string[], action: UserDataAction): string[] {
   const { type, payload} = action;
-
-  console.log('userDataReducer', action);
-  
-
   switch (type) {
     case 'ADD_BOOKMARKED_RECIPE':
       return [...state, payload ]

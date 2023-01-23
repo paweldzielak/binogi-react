@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { UserDataContext } from "../../context/user-data.context";
 
 import BookmarkedList from "../bookmarked-list/BookmarkedList";
 import SearchRecipe from "../search/SearchRecipe";
