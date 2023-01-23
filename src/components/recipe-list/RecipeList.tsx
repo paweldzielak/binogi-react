@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useContext } from "react"
+import { UserDataContext } from "../../context/user-data.context";
 import { Recipe } from '../../types/types'
 import RecipeCard from "../recipe-card/RecipeCard";
 
@@ -10,10 +11,12 @@ interface props {
 
 const RecipeList: React.FC<props> = ({ recipeList }) => {
 
+  const { bookmarkedRecipesIds, handleBookmarkedId } = useContext(UserDataContext);
+
   return (
     <div className="recipe-list">
       {recipeList.map((recipe: Recipe) => {
-        return <RecipeCard key={recipe.id} recipe={recipe} />
+        return <RecipeCard key={recipe.id} recipe={recipe} bookmarkedRecipesIds={bookmarkedRecipesIds} handleBookmarkedId={handleBookmarkedId} />
       })}
     </div>
   );

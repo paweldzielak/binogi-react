@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Button, Input, Divider } from '@chakra-ui/react'
 
@@ -10,13 +10,7 @@ import RecipeList from "../recipe-list/RecipeList";
 import "./searchRecipe.scss";
 import { Recipe, RecipeSearchResults } from "../../types/types";
 
-
-interface props {
-  handleBookmarkedId: Function
-  bookmarkedRecipesIds: string[] | null
-}
-
-const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId}) => {
+const SearchRecipe: React.FC = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [nextPageUrl, setNextPageUrl] = useState("");

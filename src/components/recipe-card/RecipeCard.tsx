@@ -1,35 +1,35 @@
-import React from "react";
-import { StarIcon, TimeIcon } from "@chakra-ui/icons";
+import React, { useContext } from "react";
+import { TimeIcon } from "@chakra-ui/icons";
 
 import "./recipe.styles.scss";
 import { Recipe } from "../../types/types";
-import { IconButton } from "@chakra-ui/react";
 import RecipeCardFavouriteButton from "./recipe-card-favourite-button/RecipeCardFavouriteButton";
 
 interface props {
   recipe: Recipe;
+  bookmarkedRecipesIds: string[] | null;
+  handleBookmarkedId: (id: string) => void;
 }
 
 function getPreparationTimeElement(preparationTime: number) {
-  if (preparationTime > 0) {
-    return (
-      <>
-        <TimeIcon boxSize="2rem" />
-        <p className="recipe-card__footer--time">{preparationTime}</p>
-      </>
-    );
-  } else return null;
+  if (preparationTime <= 0) return null;
+  return (
+    <>
+      <TimeIcon boxSize="2rem" />
+      <p className="recipe-card__footer--time">{preparationTime}</p>
+    </>
+  );
 }
 
-const handleFavourite = (id:string) => {
-  console.log('*handleFavourite*', id);
-} 
+const RecipeCard: React.FC<props> = ({
+  recipe,
+  handleBookmarkedId,
+  bookmarkedRecipesIds,
+}) => {
+  const getIsFavourite = (id: string): boolean => {
+    return bookmarkedRecipesIds !== null && bookmarkedRecipesIds.includes(id);
+  };
 
-const getIsFavourite = (id:string) :boolean =>  {
-  return true
-} 
-
-const RecipeCard: React.FC<props> = ({ recipe }) => {
   return (
     <div className="recipe-container">
       <img className="recipe-container__image" src={recipe.imageUrl} alt="" />
@@ -39,7 +39,7 @@ const RecipeCard: React.FC<props> = ({ recipe }) => {
           <p className="recipe-card__content--title">
             {recipe.label}
             <RecipeCardFavouriteButton
-              handleFavourite={handleFavourite}
+              handleFavourite={handleBookmarkedId}
               recipeId={recipe.id}
               isFavourite={getIsFavourite(recipe.id)}
             />

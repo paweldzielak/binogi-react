@@ -1,15 +1,19 @@
-enum CountActionKind {
+export enum BookmarkActionKind {
   ADD_BOOKMARKED_RECIPE = 'ADD_BOOKMARKED_RECIPE',
   REMOVE_BOOKMARKED_RECIPE = 'REMOVE_BOOKMARKED_RECIPE',
 }
 
 interface UserDataAction {
-  type: CountActionKind;
+  type: BookmarkActionKind;
   payload: string;
 }
 
 export function userDataReducer(state: string[], action: UserDataAction): string[] {
   const { type, payload} = action;
+
+  console.log('userDataReducer', action);
+  
+
   switch (type) {
     case 'ADD_BOOKMARKED_RECIPE':
       return [...state, payload ]
