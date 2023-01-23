@@ -1,13 +1,35 @@
-import React from "react";
+import { useStatStyles } from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserDataContext } from "../../context/user-data.context";
+import { Recipe } from "../../types/types";
+import { getBookmarkedRecipes } from "../../utils/recipe.utils";
+import RecipeList from "../recipe-list/RecipeList";
 import "./bookmarkedList.scss";
 
-const BookmarkedList:React.FC = () => {
+const BookmarkedList: React.FC = () => {
+  const defaultBookmarkedRecipes: Recipe[] = [];
 
-  // {recipes && <RecipeList recipeList={recipes} />}
+  const { bookmarkedRecipesIds, handleBookmarkedId } =
+    useContext(UserDataContext);
+  const [recipes, setRecipes] = useState(defaultBookmarkedRecipes);
+
+  useEffect(() => {
+    console.log('useEffect');
+    getBookmarkedRecipes(bookmarkedRecipesIds);
+
+    const recipes: Recipe[] = [];
+    setRecipes(recipes);
+  }, [bookmarkedRecipesIds]);
 
   return (
     <div className="bookmarked-list">
-      <h1>Bookmarked TEST</h1>
+      {recipes && (
+        <RecipeList
+          recipeList={recipes}
+          bookmarkedRecipesIds={bookmarkedRecipesIds}
+          handleBookmarkedId={handleBookmarkedId}
+        />
+      )}
     </div>
   );
 };

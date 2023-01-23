@@ -7,11 +7,11 @@ import "./recipeList.styles.scss";
 
 interface props {
   recipeList: Recipe[]
+  bookmarkedRecipesIds: string[] | null;
+  handleBookmarkedId: (id: string) => void;
 }
 
-const RecipeList: React.FC<props> = ({ recipeList }) => {
-
-  const { bookmarkedRecipesIds, handleBookmarkedId } = useContext(UserDataContext);
+const RecipeList: React.FC<props> = ({ recipeList, bookmarkedRecipesIds, handleBookmarkedId }) => {
 
   return (
     <div className="recipe-list">
