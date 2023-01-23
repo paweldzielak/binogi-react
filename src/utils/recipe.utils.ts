@@ -186,3 +186,9 @@ export const getSearchRecipeResults = async (query: string): Promise<RecipeSearc
   const recipes: RecipeSearchResults = await getRecipesByUrl(url);
   return recipes
 }
+
+export const getNextPageSearchRecipeResults = async (url: string): Promise<RecipeSearchResults> => {
+  const recipes: RecipeSearchResults = await getRecipesByUrl(url);
+  return recipes
+}
+

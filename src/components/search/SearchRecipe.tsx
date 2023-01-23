@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Input, Divider } from '@chakra-ui/react'
 
 import {
+  getNextPageSearchRecipeResults,
   getSearchRecipeResults,
 } from "../../utils/recipe.utils";
 import RecipeList from "../recipe-list/RecipeList";
@@ -16,23 +17,34 @@ interface props {
 }
 
 const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId}) => {
-  // console.log('searchRecipe', handleBookmarkedId);
 
   const [inputValue, setInputValue] = useState("");
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [recipes, setRecipes] = useState<Recipe[]>();
+
+  const handleChangeSearchResults = (result: RecipeSearchResults) => {
+    const { nextPageUrl, recipes }: { recipes: Recipe[]; nextPageUrl: string } =
+      result;
+    setRecipes(recipes);
+    setNextPageUrl(nextPageUrl);
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const result: RecipeSearchResults = await getSearchRecipeResults(
       inputValue
     );
-    const { nextPageUrl, recipes }: { recipes: Recipe[]; nextPageUrl: string } =
-      result;
-
-    setRecipes(recipes);
-    setNextPageUrl(nextPageUrl);
+    handleChangeSearchResults(result);
   };
+
+  const handleLoadMoreRecipes = async () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    const result: RecipeSearchResults = await getNextPageSearchRecipeResults(
+      nextPageUrl
+    );
+    handleChangeSearchResults(result);
+  }
+
 
   return (
     <>
@@ -55,6 +67,10 @@ const SearchRecipe: React.FC<props> = ({bookmarkedRecipesIds, handleBookmarkedId
         <Divider width='90%' className="search-recipe__horizontal"/>
       </div>
       {recipes && <RecipeList {...{ recipeList: recipes, nextPageUrl: nextPageUrl }} />}
+      {nextPageUrl && <Button colorScheme='blue' size='lg' margin='0.2rem auto' marginTop='2rem' display='block'
+      className="btn btn-next-page recipe-list__btn" onClick={handleLoadMoreRecipes}>
+        Show more 
+      </Button>}
     </>
   );
 };
