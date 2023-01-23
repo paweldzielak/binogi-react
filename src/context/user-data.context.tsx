@@ -6,7 +6,7 @@ import {
 } from "../reducers/userDataReducer";
 
 export type RecipeContextState = {
-  bookmarkedRecipesIds: string[] | null;
+  bookmarkedRecipesIds: string[];
   handleBookmarkedId: (id: string) => void;
 };
 
@@ -18,11 +18,7 @@ export const contextDefaultValues: RecipeContextState = {
 export const UserDataContext =
   createContext<RecipeContextState>(contextDefaultValues);
 
-export const UserDataProvider = ({
-  children,
-}: {
-  children: JSX.Element | JSX.Element[];
-}) => {
+export const UserDataProvider = ({children }: { children: JSX.Element | JSX.Element[]; }) => {
   const [bookmarkedRecipesIds, setBookmarkedRecipesIds] = useLocalStorage(
     "bookmarkedRecipesIds",
     contextDefaultValues.bookmarkedRecipesIds
@@ -30,8 +26,7 @@ export const UserDataProvider = ({
 
   const [currentBookmarkedRecipeIds, dispatch] = useReducer(
     userDataReducer,
-    [],
-    () => []
+    bookmarkedRecipesIds || []
   );
 
   const handleBookmarkedId = (recipeId: string) => {
