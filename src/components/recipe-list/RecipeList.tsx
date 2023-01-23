@@ -1,7 +1,6 @@
-import { Button } from "@chakra-ui/react";
 import React from "react"
 import { Recipe } from '../../types/types'
-import RecipeCard from "../recipe/RecipeCard";
+import RecipeCard from "../recipe-card/RecipeCard";
 
 import "./recipeList.styles.scss";
 
@@ -13,8 +12,8 @@ const RecipeList: React.FC<props> = ({ recipeList }) => {
 
   return (
     <div className="recipe-list">
-      {recipeList.map((recipe: Recipe, idx) => {
-        return <RecipeCard key={recipe.label + idx} recipe={recipe} />
+      {recipeList.map((recipe: Recipe) => {
+        return <RecipeCard key={recipe.id} recipe={recipe} />
       })}
     </div>
   );
