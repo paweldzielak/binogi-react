@@ -1,4 +1,3 @@
-import { useStatStyles } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { UserDataContext } from "../../context/user-data.context";
 import { Recipe } from "../../types/types";
@@ -14,11 +13,11 @@ const BookmarkedList: React.FC = () => {
   const [recipes, setRecipes] = useState(defaultBookmarkedRecipes);
 
   useEffect(() => {
-    console.log('useEffect');
-    getBookmarkedRecipes(bookmarkedRecipesIds);
-
-    const recipes: Recipe[] = [];
-    setRecipes(recipes);
+    getBookmarkedRecipes(bookmarkedRecipesIds).then(
+      ({ recipes, nextPageUrl }) => {
+        setRecipes(recipes);
+      }
+    );
   }, [bookmarkedRecipesIds]);
 
   return (
