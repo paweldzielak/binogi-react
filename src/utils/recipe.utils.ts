@@ -156,7 +156,7 @@ const getRecipeId = (directUrl: string): string => {
   return directUrl.split('/')[6].split('?')[0];
 }
 
-const getRecipeFromData = ( _links: Links, recipe: RecipeAPI ) => {
+const getRecipeFromData = (_links: Links, recipe: RecipeAPI) => {
   return {
     id: getRecipeId(_links?.self?.href),
     imageUrl: recipe.image,
@@ -196,21 +196,3 @@ export const getNextPageSearchRecipeResults = async (url: string): Promise<Recip
   const recipes: RecipeSearchResults = await getRecipesByUrl(url);
   return recipes
 }
-
-export const getBookmarkedRecipes = async (ids : string[]) : Promise<RecipeSearchResults> => {
-  const urls = ids.map(async (id : string) => {
-    const { data } = await axios.get(`https://api.edamam.com/api/recipes/v2/${id}/?app_id=${process.env.REACT_APP_RECIPE_API_ID}&app_key=${process.env.REACT_APP_RECIPE_API_KEY}&type=public`)
-    return data
-  })
-  let recipes: Recipe[] = [];
-  const data = await Promise.all(urls).then((values) => values);
-
-  console.log(data);
-  
-  recipes = data.map(({ _links, recipe }: { _links: Links, recipe: RecipeAPI }) => {
-    return getRecipeFromData(_links, recipe)
-  })
-
-  return {recipes, nextPageUrl: ''}
-}
-

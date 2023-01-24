@@ -4,36 +4,37 @@ import {
   BookmarkActionKind,
   userDataReducer,
 } from "../reducers/userDataReducer";
+import { Recipe } from "../types/types";
 
 export type RecipeContextState = {
-  bookmarkedRecipesIds: string[];
-  handleBookmarkedId: (id: string) => void;
+  bookmarkedRecipes: Recipe[];
+  handleBookmarked: (recipe: Recipe) => void;
 };
 
 export const contextDefaultValues: RecipeContextState = {
-  bookmarkedRecipesIds: [],
-  handleBookmarkedId: () => {},
+  bookmarkedRecipes: [],
+  handleBookmarked: () => {},
 };
 
 export const UserDataContext =
   createContext<RecipeContextState>(contextDefaultValues);
 
 export const UserDataProvider = ({children }: { children: JSX.Element | JSX.Element[]; }) => {
-  const [bookmarkedRecipesIds, setBookmarkedRecipesIds] = useLocalStorage(
-    "bookmarkedRecipesIds",
-    contextDefaultValues.bookmarkedRecipesIds
+  const [bookmarkedRecipes, setBookmarkedRecipesIds] = useLocalStorage(
+    "bookmarkedRecipes",
+    contextDefaultValues.bookmarkedRecipes
   );
 
   const [currentBookmarkedRecipeIds, dispatch] = useReducer(
     userDataReducer,
-    bookmarkedRecipesIds || []
+    bookmarkedRecipes || []
   );
 
-  const handleBookmarkedId = (recipeId: string) => {
-    const type = bookmarkedRecipesIds?.includes(recipeId)
+  const handleBookmarked = (recipe: Recipe) => {
+    const type = bookmarkedRecipes?.includes(recipe)
       ? BookmarkActionKind.REMOVE_BOOKMARKED_RECIPE
       : BookmarkActionKind.ADD_BOOKMARKED_RECIPE;
-    dispatch({ type, payload: recipeId });
+    dispatch({ type, payload: recipe });
   };
 
   useEffect(() => {
@@ -43,8 +44,8 @@ export const UserDataProvider = ({children }: { children: JSX.Element | JSX.Elem
   return (
     <UserDataContext.Provider
       value={{
-        bookmarkedRecipesIds: currentBookmarkedRecipeIds,
-        handleBookmarkedId: handleBookmarkedId,
+        bookmarkedRecipes: bookmarkedRecipes || [],
+        handleBookmarked: handleBookmarked,
       }}
     >
       {children}

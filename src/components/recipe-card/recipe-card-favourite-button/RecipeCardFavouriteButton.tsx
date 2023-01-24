@@ -1,19 +1,20 @@
 import React from "react";
 import { IconButton } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { Recipe } from "../../../types/types";
 
 type Props = {
-  handleFavourite: (recipeId: string) => void;
-  recipeId: string;
+  handleFavourite: (recipe: Recipe) => void;
+  recipe: Recipe;
   isFavourite: boolean;
 };
 
 const RecipeCardFavouriteButton = (props: Props) => {
-  const { handleFavourite, recipeId, isFavourite } = props;
+  const { handleFavourite, recipe, isFavourite } = props;
 
   return (
     <IconButton
-      title="Accept requested meeting."
+      title={isFavourite ? "Remove from your favourites" : "Add to favourites"}
       bg="transparent"
       fontSize="2rem"
       color={isFavourite ? "#dfa137" : "#3c3c3c"}
@@ -26,7 +27,7 @@ const RecipeCardFavouriteButton = (props: Props) => {
       
       marginLeft="0.75rem"
       marginTop="-0.75rem"
-      onClick={() => handleFavourite(recipeId)}
+      onClick={() => handleFavourite(recipe)}
       aria-label="Search database"
       size="lg"
       icon={<StarIcon />}

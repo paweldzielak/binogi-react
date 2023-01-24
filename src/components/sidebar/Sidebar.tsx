@@ -9,12 +9,12 @@ const Sidebar :React.FC = () => {
     <nav className="sidebar">
       <p>
         <Link to="/search">
-          {<Button size='lg'>Search recipes</Button>}
+          {<Button fontSize='1.5rem' size='lg'>Search recipes</Button>}
         </Link>
       </p>
       <p>
         <Link to="/bookmarked">
-          {<Button size='lg'>Bookmarked recipes</Button>}
+          {<Button  fontSize='1.5rem'size='lg'>Bookmarked recipes</Button>}
         </Link>
       </p>
     </nav>

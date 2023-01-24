@@ -15,7 +15,7 @@ const SearchRecipe: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [recipes, setRecipes] = useState<Recipe[]>();
-  const { bookmarkedRecipesIds, handleBookmarkedId } = useContext(UserDataContext);
+  const { bookmarkedRecipes, handleBookmarked } = useContext(UserDataContext);
 
   const handleChangeSearchResults = (result: RecipeSearchResults) => {
     const { nextPageUrl, recipes }: { recipes: Recipe[]; nextPageUrl: string } =
@@ -51,12 +51,16 @@ const SearchRecipe: React.FC = () => {
             type="text"
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Search for a meal"
+            fontSize={'2rem'}
+            padding='1.5rem'
+            height='3rem'
           />
           <Button
             colorScheme="blue"
             size="lg"
             type="submit"
             className="btn btn-submit search-recipe__button"
+            fontSize='1.5rem'
           >
             Search
           </Button>
@@ -66,8 +70,8 @@ const SearchRecipe: React.FC = () => {
       {recipes && (
         <RecipeList
           recipeList={recipes}
-          bookmarkedRecipesIds={bookmarkedRecipesIds}
-          handleBookmarkedId={handleBookmarkedId}
+          bookmarkedRecipes={bookmarkedRecipes}
+          handleBookmarked={handleBookmarked}
         />
       )}
       {nextPageUrl && (

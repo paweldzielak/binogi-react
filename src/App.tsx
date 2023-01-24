@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ChakraProvider } from "@chakra-ui/react";
 
-import Header from "./components/header/Header";
 import MainContent from "./components/main-content/MainContent";
 import Sidebar from "./components/sidebar/Sidebar";
 
@@ -16,7 +15,6 @@ function App() {
       <ChakraProvider>
         <UserDataProvider>
           <BrowserRouter>
-            <Header />
             <Sidebar />
             <MainContent />
           </BrowserRouter>

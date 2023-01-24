@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { TimeIcon } from "@chakra-ui/icons";
 
 import "./recipe.styles.scss";
@@ -7,8 +7,8 @@ import RecipeCardFavouriteButton from "./recipe-card-favourite-button/RecipeCard
 
 interface props {
   recipe: Recipe;
-  bookmarkedRecipesIds: string[] | null;
-  handleBookmarkedId: (id: string) => void;
+  bookmarkedRecipes: Recipe[] | null;
+  handleBookmarked: (recipe: Recipe) => void;
 }
 
 function getPreparationTimeElement(preparationTime: number) {
@@ -23,11 +23,13 @@ function getPreparationTimeElement(preparationTime: number) {
 
 const RecipeCard: React.FC<props> = ({
   recipe,
-  handleBookmarkedId,
-  bookmarkedRecipesIds,
+  handleBookmarked,
+  bookmarkedRecipes,
 }) => {
   const getIsFavourite = (id: string): boolean => {
-    return bookmarkedRecipesIds !== null && bookmarkedRecipesIds.includes(id);
+    return bookmarkedRecipes !== null && bookmarkedRecipes.some((recipe:Recipe) => {
+      return recipe.id === id
+    });
   };
 
   return (
@@ -39,8 +41,8 @@ const RecipeCard: React.FC<props> = ({
           <p className="recipe-card__content--title">
             {recipe.label}
             <RecipeCardFavouriteButton
-              handleFavourite={handleBookmarkedId}
-              recipeId={recipe.id}
+              handleFavourite={handleBookmarked}
+              recipe={recipe}
               isFavourite={getIsFavourite(recipe.id)}
             />
           </p>
