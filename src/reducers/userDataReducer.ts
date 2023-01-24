@@ -10,7 +10,7 @@ interface UserDataAction {
   payload: Recipe;
 }
 
-export function userDataReducer(state: Recipe[], action: UserDataAction): Recipe[] {
+export const userDataReducer = (state: Recipe[], action: UserDataAction): Recipe[] => {
   const { type, payload} = action;
   switch (type) {
     case 'ADD_BOOKMARKED_RECIPE':

@@ -11,7 +11,7 @@ interface props {
   handleBookmarked: (recipe: Recipe) => void;
 }
 
-function getPreparationTimeElement(preparationTime: number) {
+const getPreparationTimeElement = (preparationTime: number) => {
   if (preparationTime <= 0) return null;
   return (
     <>
